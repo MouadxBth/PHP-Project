@@ -1,59 +1,73 @@
-<?php 
+<?php
 
-include "config.php";
+include_once("config.php");
+include_once("tables.php");
 
-  if (isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
 
-    $task = $_POST['task'];
+  $firstName = $_POST['firstName'];
 
-    $date = $_POST['date'];
+  $lastName = $_POST['lastName'];
 
-    $sql = "INSERT INTO `todo`(`task`, `date`) VALUES ('$task','$date')";
+  $email = $_POST['email'];
 
-    $result = $conn->query($sql);
+  $date = $_POST['date'];
 
-    $conn->close(); 
+  $sql = "INSERT INTO `People`(`firstname`, `lastname`, `email`, `reg_date`) VALUES ('$firstName','$lastName','$email','$date')";
 
-  }
+  $result = $conn->query($sql);
+
+}
 
 ?>
 
 <!DOCTYPE html>
 
 <html>
+
 <head>
-<title>To Do List</title>
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <title>People</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
 </head>
+
 <body>
-<div class="container">
-<h2>TO DO LIST MANAGER</h2>
+  <div class="container">
+    <h2 style="text-align: center;">PEOPLE MANAGER</h2>
 
-<form action="" method="POST">
+    <form action="" method="POST">
 
-  <fieldset>
-	<legend>ADD YOUR TASK:</legend>
-	<label for="task">TASK :</label>
-    <input type="text" class="form-control" name="task">
-    <br>
+      <fieldset>
+        <legend>ADD A PERSON:</legend>
 
-    <label for="date">DATE :</label>
-    <input type="date" class="form-control" name="date">
+        <label for="firstName">FIRST NAME :</label>
+        <input type="text" class="form-control" name="firstName" required>
+        <br>
 
-    <br><br>
+        <label for="lastName">LAST NAME :</label>
+        <input type="text" class="form-control" name="lastName" required>
+        <br>
 
-    <input type="submit" class="btn btn-primary" name="submit" value="submit">
-<!-- <a class="btn btn-primary" href="view.php" role="button">view</a> -->
-  </fieldset>
+        <label for="email">EMAIL :</label>
+        <input type="text" class="form-control" name="email" required>
+        <br>
 
-</form>
-</div>
+        <label for="date">DATE :</label>
+        <input type="date" class="form-control" name="date" required>
+
+        <br><br>
+
+        <input type="submit" class="btn btn-primary" name="submit" value="submit">
+      </fieldset>
+
+    </form>
+  </div>
 </body>
 
 </html>
-<?php 
+<?php
 
-include "view.php";
+include_once("view.php");
 
 ?>

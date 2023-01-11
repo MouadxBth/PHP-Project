@@ -1,6 +1,6 @@
 <?php
 
-include("config.php");
+include_once("config.php");
 
 function createTable($conn) {
     if ($conn->connect_error) {
@@ -15,13 +15,19 @@ function createTable($conn) {
         reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
     
-    if ($conn->query($sql))
-        echo "Table MyGuests created successfully";
-    else
+    if (!$conn->query($sql))
         echo "Error creating table: " . $conn->error;
 
 }
 
-createTable($conn);
+try {
+    $table = mysqli_query($conn, "SELECT * FROM People");
+    if (empty($table))
+        createTable($conn);
+
+} catch (Exception $e) {
+    createTable($conn);
+}
+
 
 ?>

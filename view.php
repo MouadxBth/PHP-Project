@@ -1,8 +1,8 @@
-<?php 
+<?php
 
-include "config.php";
+include_once("config.php");
 
-$sql = "SELECT * FROM todo";
+$sql = "SELECT * FROM People";
 
 $result = $conn->query($sql);
 
@@ -14,11 +14,11 @@ $result = $conn->query($sql);
 
 <head>
 
-    <title>View Page</title>
+    <title>People</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
 </head>
 
@@ -26,61 +26,69 @@ $result = $conn->query($sql);
 
     <div class="container">
 
-        <h2>TO DO LIST :</h2>
+        <h2>REGISTERED PEOPLE :</h2>
 
-<table class="table table-striped">
+        <table class="table table-striped">
 
-    <thead>
+            <thead>
 
-        <tr>
+                <tr>
 
-        <th>ID</th>
+                    <th>ID</th>
 
-        <th>TASK</th>
+                    <th>FULL NAME</th>
 
-        <th>DATE</th>
+                    <th>EMAIL</th>
 
-    </tr>
+                    <th>REGISTRATION DATE</th>
 
-    </thead>
+                </tr>
 
-    <tbody> 
+            </thead>
 
-        <?php
+            <tbody>
 
-            if ($result->num_rows > 0) {
+                <?php
 
-                while ($row = $result->fetch_assoc()) {
+                if ($result->num_rows > 0) {
 
-        ?>
+                    while ($row = $result->fetch_assoc()) {
 
-                    <tr>
+                        ?>
 
-                    <td><?php echo $row['id']; ?></td>
+                        <tr>
 
-                    <td><?php echo $row['task']; ?></td>
+                            <td><?php echo $row['id']; ?></td>
 
-                    <td><?php echo $row['date']; ?></td>
+                            <td>
+                                <?php echo $row['firstname'] . " " . $row['lastname']; ?>
+                            </td>
 
-                    <td>
-                        <a class="btn btn-info" href="update.php?id=<?php echo $row['id']; ?>">Edit</a>
-                        &nbsp;
-                        <a class="btn btn-danger" href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
-                    </td>
+                            <td>
+                                <?php echo $row['email']; ?>
+                            </td>
 
-                    </tr>                       
+                            <td><?php echo $row['reg_date']; ?></td>
 
-        <?php       }
+                            <td>
+                                <a class="btn btn-info" href="update.php?id=<?php echo $row['id']; ?>">Edit</a>
+                                &nbsp;
+                                <a class="btn btn-danger" href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
+                            </td>
 
-            }
+                        </tr>
 
-        ?>                
+                    <?php }
 
-    </tbody>
+                }
 
-</table>
+                ?>
 
-    </div> 
+            </tbody>
+
+        </table>
+
+    </div>
 
 </body>
 

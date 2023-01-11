@@ -4,16 +4,16 @@ include "config.php";
 
 if (isset($_GET['id'])) {
 
-    $task_id = $_GET['id'];
+    $id = $_GET['id'];
 
-    $sql = "DELETE FROM `todo` WHERE `id`='$task_id'";
+    $sql = "DELETE FROM `People` WHERE `id`='$id'";
 
      $result = $conn->query($sql);
 	 if ($result == TRUE) {
-
-        echo "Record deleted successfully.";
-
-    }else{
+        header("Location: create.php");
+    }
+    
+    else{
 
         echo "Error:" . $sql . "<br>" . $conn->error;
 
